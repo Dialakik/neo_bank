@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: neo_bank
+    database: neobankprojectlewagon
+    schema: neo_bank
+    tables:
+      - name: users
+      - name: transactions
+      - name: devices
+      - name: notifications
