@@ -1,6 +1,6 @@
 SELECT
     users.* EXCEPT(created_date),
-    users.created_date AS user_created_date,
+    CAST(users.created_date AS DATE) AS user_created_date,
 
     transactions.* EXCEPT(user_id),
 
