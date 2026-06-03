@@ -23,7 +23,7 @@ renamed as (
         created_date
 
     from source
-
+    where transactions_state = "COMPLETED"
 )
 
 select * from renamed

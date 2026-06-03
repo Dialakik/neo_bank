@@ -18,3 +18,5 @@ LEFT JOIN {{ ref('notifications_group_by_user') }} AS notifications
 
 LEFT JOIN {{ ref('stg_neo_bank__devices') }} AS devices
     USING (user_id)
+
+--where user_id = "user_4565"
