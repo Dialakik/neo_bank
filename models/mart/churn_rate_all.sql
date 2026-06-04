@@ -26,7 +26,7 @@ user_monthly_status AS (
 
 -- 3. Agrégation finale par mois
 SELECT
-  FORMAT_DATE('%Y-%m', mois) AS mois_annee,
+  FORMAT_DATE('%Y%m', mois) AS mois_annee,
   SUM(is_active) AS utilisateurs_actifs,
   SUM(is_churned) AS utilisateurs_churnes,
   SAFE_DIVIDE(SUM(is_churned), SUM(is_active)) AS churn_rate
