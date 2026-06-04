@@ -8,9 +8,9 @@ SELECT
 
     devices.* EXCEPT(user_id),
     CASE 
-        WHEN (users.birth_year > 30 and users.birth_year <= 40) and transactions.is_globtrotter = 1 THEN "30s GLOBE TROTTEUR" 
+        WHEN (users.birth_year < 1989 and users.birth_year <= 1979 ) and transactions.is_globtrotter = 1 THEN "30s GLOBE TROTTEUR" 
         WHEN users.user_settings_crypto_unlocked = 1 THEN "CRYPTO LOVER" 
-        WHEN (users.birth_year > 15 and users.birth_year <= 25) and (total_amounts_in - total_amounts_out < 500) THEN "Jeune en galère" 
+        WHEN (users.birth_year < 2004 and users.birth_year >= 1994) and (total_amounts_in - total_amounts_out < 500) THEN "Jeune en galère" 
         WHEN total_amounts_in - total_amounts_out > 2000 THEN "EPARGNANT"
         ELSE "other people less interesting" END as persona
 
