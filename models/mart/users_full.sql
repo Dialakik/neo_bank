@@ -6,7 +6,10 @@ SELECT
 
     notifications.* EXCEPT(user_id),
 
-    devices.* EXCEPT(user_id)
+    devices.* EXCEPT(user_id),
+    CASE
+        WHEN (total_amounts_out - total_amounts_in) > 2000 THEN "epargnant"
+        ELSE "no personna" END as persona
 
 FROM {{ ref('stg_neo_bank__users') }} AS users
 
