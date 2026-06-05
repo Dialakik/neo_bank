@@ -11,7 +11,8 @@ SELECT
     CASE WHEN (users.birth_year < 2004 and users.birth_year >= 1994) and (total_amounts_in - total_amounts_out < 500) THEN 1 ELSE 0 END AS IS_JEUNE_CSP_MOINS,
     CASE WHEN transactions.nb_devises > 3 THEN 1 ELSE 0 END AS IS_GLOBTROTTEUR,
     CASE WHEN users.user_settings_crypto_unlocked = 1 THEN 1 ELSE 0 END AS IS_CRYPTO_USER,
-    transactions.quartile_nb_transactions = 4 AS IS_CORE,
+    CASE WHEN transactions.quartile_nb_transactions = 4 THEN 1 ELSE 0 END AS IS_CORE,
+    CASE WHEN transactions.quartile_total_amounts_in = 4 THEN 1 ELSE 0 END AS IS_PRIMARY,
     CASE 
         WHEN nb_transactions = 0 THEN EXTRACT(DATE FROM DATETIME_ADD(DATETIME(users.created_date), INTERVAL 14 DAY)) 
         ELSE EXTRACT(DATE FROM DATETIME_ADD(DATETIME(transactions.date_last_transaction), INTERVAL 1 MONTH)) 
