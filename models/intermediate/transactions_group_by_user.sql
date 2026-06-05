@@ -17,9 +17,9 @@ ntile(4) OVER (ORDER BY SUM(CASE WHEN direction = 'INBOUND' THEN amount_usd ELSE
 
 COUNT(DISTINCT transactions_currency) as nb_devises,
 
-MIN(created_date) as date_first_transaction,
-MAX(created_date) as date_last_transaction
-
+cast(MIN(created_date)as DATE) as date_first_transaction,
+--MAX(created_date) as date_last_transaction
+cast(MAX(created_date) as DATE) as date_last_transaction
 FROM {{ ref('stg_neo_bank__transactions') }} AS notif
 GROUP BY user_id
 
