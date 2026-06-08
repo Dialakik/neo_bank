@@ -1,3 +1,4 @@
+
 SELECT
     users.*,
     transactions.* EXCEPT(user_id)
