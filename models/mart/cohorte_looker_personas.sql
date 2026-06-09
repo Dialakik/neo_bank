@@ -1,17 +1,15 @@
 WITH bounds AS (
   SELECT MAX(last_txn_month) AS data_max_month, MIN(cohort_month) AS first_cohort
-  FROM {{ ref('PGO_cohorte_base') }}
+  FROM {{ ref('cohorte_base') }}
 ),
 expanded AS (
   SELECT b.user_id, b.cohort_month, b.churn_month, seg
-  FROM {{ ref('PGO_cohorte_base') }} b,
+  FROM {{ ref('cohorte_base') }} b,
   UNNEST(ARRAY_CONCAT(
     ['Global'],
-    IF(b.is_core,     ['Core'],      ARRAY<STRING>[]),
     IF(b.is_traveler, ['Voyageurs'], ARRAY<STRING>[]),
     IF(b.is_young,    ['Jeunes'],    ARRAY<STRING>[]),
-    [IF(b.is_paid,    'Payants', 'Free')],
-    [IF(b.is_crypto,  'Crypto', 'Non-crypto')]
+    IF(b.is_crypto,    ['Crypto'],    ARRAY<STRING>[])
   )) AS seg
 )
 SELECT
