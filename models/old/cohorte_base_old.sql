@@ -1,8 +1,6 @@
-
---> donne 4, le plus haut quartile, pour pouvoir déterminer ensuite le paramètre is_core : u.quartile_nb_transactions = cq.q
 WITH core_q AS (
   SELECT quartile_nb_transactions AS q
-  FROM {{ ref('PGO_users_full') }}
+  FROM {{ ref('users_full') }}
   GROUP BY q ORDER BY AVG(nb_transactions) DESC LIMIT 1
 )
 SELECT
@@ -22,6 +20,6 @@ SELECT
   u.plan != 'STANDARD'                                          AS is_paid,    -- adapte 'STANDARD' à ton tier gratuit
   u.user_settings_crypto_unlocked = 1                          AS is_crypto,
   u.plan, u.country, u.device_type
-FROM {{ ref('PGO_users_full') }} u
+FROM {{ ref('users_full') }} u
 CROSS JOIN core_q cq
 order by user_id
