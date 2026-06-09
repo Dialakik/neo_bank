@@ -21,7 +21,9 @@ SELECT
     CASE 
         WHEN nb_transactions = 0 THEN EXTRACT(DATE FROM DATETIME_ADD(DATETIME(users.created_date), INTERVAL 14 DAY)) 
         ELSE EXTRACT(DATE FROM DATETIME_ADD(DATETIME(transactions.date_last_transaction), INTERVAL 1 MONTH)) 
-    END AS date_churn
+    END AS date_churn,
+    CASE WHEN users.plan LIKE "STANDARD" THEN "STANDARD" ELSE "PREMIUM" END AS PLAN_SIMPLE
+
 
 
 FROM {{ ref('stg_neo_bank__users') }} AS users
