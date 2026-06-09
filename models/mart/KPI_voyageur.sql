@@ -5,6 +5,6 @@ SELECT
   ROUND(AVG(total_amounts_out), 0)                              AS depense_moy_par_user,
   ROUND(APPROX_QUANTILES(total_amounts_out, 100)[OFFSET(50)], 0) AS depense_mediane,
   ROUND(AVG(nb_transactions), 1)                                AS nb_transac_moyen,
-  ROUND(COUNTIF(date_churn > '2019-05-16')/ COUNT(*),1) AS taux_retention
+  ROUND(COUNTIF(date_churn > '2019-05-16')/ COUNT(*),2) AS taux_retention
 FROM {{ ref('users_full') }}
 WHERE IS_GLOBTROTTEUR = 1 
