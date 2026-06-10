@@ -8,5 +8,5 @@ SELECT
   ROUND(AVG(CASE WHEN IS_GLOBTROTTEUR = 1 THEN total_amounts_in END), 2) AS moyenne_depense_voyageur,
   ROUND(AVG(CASE WHEN IS_JEUNE_CSP_MOINS = 1 THEN total_amounts_in END), 2) AS moyenne_depense_jeune_csp_moins,
   ROUND(AVG(nb_transactions), 2) AS moyenne_nb_transactions_globale,
-  ROUND(AVG(CASE WHEN IS_JEUNE_CSP_MOINS = 1 THEN nb_transactions END), 2) AS moyenne_nb_transactions_crypto,
+  ROUND(AVG(CASE WHEN IS_CRYPTO_USER = 1 THEN nb_transactions END), 2) AS moyenne_nb_transactions_crypto,
 FROM {{ ref('users_full') }}
